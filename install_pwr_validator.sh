@@ -2,7 +2,7 @@
 
 # Update sistem dan instal Java Development Kit (JDK)
 echo "Updating system and installing Java..."
-sudo apt update && sudo apt install -y default-jdk
+sudo apt update && sudo apt install -y openjdk-17-jdk
 
 # Set up environment variables for Java
 export JAVA_HOME=/usr/bin/java
