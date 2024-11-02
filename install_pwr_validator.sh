@@ -8,6 +8,16 @@ sudo apt update && sudo apt install -y openjdk-17-jdk
 export JAVA_HOME=/usr/bin/java
 export PATH=$PATH:$JAVA_HOME
 
+# Mengatur firewall untuk membuka port yang diperlukan
+echo "Configuring firewall rules..."
+sudo ufw allow 8231/tcp
+sudo ufw allow 8085/tcp
+sudo ufw allow 7621/udp
+sudo iptables -A INPUT -p tcp --dport 8085 -j ACCEPT
+sudo iptables -A INPUT -p tcp --dport 8231 -j ACCEPT
+sudo iptables -A INPUT -p udp --dport 7621 -j ACCEPT
+sudo ufw reload
+
 # Ambil versi terbaru dari validator.jar
 echo "Fetching the latest version of validator.jar..."
 latest_version=$(curl -s https://api.github.com/repos/pwrlabs/PWR-Validator/releases/latest | grep -Po '"tag_name": "\K.*?(?=")')
