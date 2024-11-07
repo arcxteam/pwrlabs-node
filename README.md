@@ -9,12 +9,17 @@ sudo ./install_pwr_validator.sh
 ```
 
 sudo systemctl start pwr.service
+
 sudo systemctl status pwr.service
+
 sudo journalctl -u pwr.service -f
 
 sudo systemctl restart pwr.service
+
 sudo systemctl status pwr.service
+
 sudo journalctl -u pwr.service -f
 
 sudo systemctl daemon-reload
+
 sudo systemctl restart pwr.service
