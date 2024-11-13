@@ -28,14 +28,11 @@ sudo systemctl restart pwr.service && \
 sudo journalctl -u pwr.service -f
 ```
 
-
+**Note**: V 13.0.0 introduced validator checks before the node starts. Make sure ports 8085 and 8231 are open for TCP and port 7621 is open for UDP.
+**Note**: If port 7621 is open for UDP but the node is saying that it's offline, then just try starting the node over and over agin, because detecting UDP ports can sometimes be hard.
 
 
 sudo systemctl start pwr.service
-
-sudo systemctl status pwr.service
-
-sudo journalctl -u pwr.service -f
 
 sudo systemctl restart pwr.service
 
@@ -44,5 +41,3 @@ sudo systemctl status pwr.service
 sudo journalctl -u pwr.service -f
 
 sudo systemctl daemon-reload
-
-sudo systemctl restart pwr.service
