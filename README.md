@@ -1,3 +1,9 @@
+![Testnet Node - Full Guides cover](https://github.com/user-attachments/assets/bbd41c87-db2a-4b0c-b0e8-d1136cd0eca0)
+
+# Run Pwr Chain Node - A Complete Guides
+
+## Soon.....
+
 ```
 curl -o install_pwr_validator.sh -L "https://raw.githubusercontent.com/arcxteam/pwrlabs-node/main/install_pwr_validator.sh" && chmod +x install_pwr_validator.sh
 ```
