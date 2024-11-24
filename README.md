@@ -38,6 +38,17 @@ sudo journalctl -u pwr.service -f
 **Note**: If port 7621 is open for UDP but the node is saying that it's offline, then just try starting the node over and over agin, because detecting UDP ports can sometimes be hard.
 
 
+**Check Related Ports or Files (listen or not)**
+```
+sudo lsof -i -n | grep java
+```
+
+```diff
+- java      4168880            root   16u  IPv6 28xxxxxx4x      0t0  TCP *:8085 (LISTEN)
+- java      4168880            root   17u  IPv6 28xxxxxx6x      0t0  UDP *:7621 
+- java      4168880            root  113u  IPv6 28xxxxxx9x      0t0  TCP *:8231 (LISTEN)
+```
+
 sudo systemctl start pwr.service
 
 sudo systemctl restart pwr.service
