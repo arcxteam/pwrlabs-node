@@ -1,25 +1,25 @@
 #!/bin/bash
 
-# Update dan gunakan JDK 22 saja
-echo "Checking and setting up JDK 22..."
-if [ ! -d "/usr/lib/jvm/jdk-22.0.1+8" ]; then
-    echo "JDK 22 not found, installing..."
+# Update dan gunakan JDK 23 saja
+echo "Checking and setting up JDK 23..."
+if [ ! -d "/usr/lib/jvm/jdk-23" ]; then
+    echo "JDK 23 not found, installing..."
     sudo apt update
     sudo apt install -y wget
     sudo mkdir -p /usr/lib/jvm
-    sudo wget -O /tmp/jdk-22.tar.gz "https://github.com/adoptium/temurin22-binaries/releases/download/jdk-22.0.1%2B8/OpenJDK22U-jdk_x64_linux_hotspot_22.0.1_8.tar.gz"
-    sudo tar -xzf /tmp/jdk-22.tar.gz -C /usr/lib/jvm
-    sudo rm /tmp/jdk-22.tar.gz
-    sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-22.0.1+8/bin/java 2000
-    sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk-22.0.1+8/bin/javac 2000
-    sudo update-alternatives --set java /usr/lib/jvm/jdk-22.0.1+8/bin/java
-    sudo update-alternatives --set javac /usr/lib/jvm/jdk-22.0.1+8/bin/javac
+    sudo wget -O /tmp/jdk-23.tar.gz "https://download.oracle.com/java/23/latest/jdk-23_linux-x64_bin.deb"
+    sudo dpkg -i /tmp/jdk-23.tar.gz
+    sudo rm /tmp/jdk-23.tar.gz
+    sudo update-alternatives --install /usr/bin/java java /usr/lib/jvm/jdk-23/bin/java 2000
+    sudo update-alternatives --install /usr/bin/javac javac /usr/lib/jvm/jdk-23/bin/javac 2000
+    sudo update-alternatives --set java /usr/lib/jvm/jdk-23/bin/java
+    sudo update-alternatives --set javac /usr/lib/jvm/jdk-23/bin/javac
 else
-    echo "JDK 22 already installed."
+    echo "JDK 23 already installed."
 fi
 
 # Set up env Java
-export JAVA_HOME=/usr/lib/jvm/jdk-22.0.1+8
+export JAVA_HOME=/usr/lib/jvm/jdk-23
 export PATH=$JAVA_HOME/bin:$PATH
 
 # Konfigurasi firewall
@@ -46,11 +46,11 @@ echo "Creating start-up script..."
 sudo tee /usr/local/bin/start-pwr-validator.sh > /dev/null <<EOL
 #!/bin/bash
 
-export JAVA_HOME=/usr/lib/jvm/jdk-22.0.1+8
+export JAVA_HOME=/usr/lib/jvm/jdk-23
 export PATH=\$JAVA_HOME/bin:\$PATH
 
 # Jalankan validator dengan konfigurasi
-exec /usr/bin/java -jar /root/validator.jar password <YOUR_SERVER_IP> --compression-level 3 --config /root/config.json
+exec /usr/bin/java -jar /root/validator.jar password <YOUR_SERVER_IP> --compression-level 2 --config /root/config.json
 EOL
 
 # Ganti <YOUR_SERVER_IP> dengan alamat IP server VPS
@@ -69,8 +69,8 @@ After=network.target
 [Service]
 User=root
 WorkingDirectory=/root
-Environment="JAVA_HOME=/usr/lib/jvm/jdk-22.0.1+8"
-Environment="PATH=/usr/lib/jvm/jdk-22.0.1+8/bin:/usr/bin"
+Environment="JAVA_HOME=/usr/lib/jvm/jdk-23"
+Environment="PATH=/usr/lib/jvm/jdk-23/bin:/usr/bin"
 ExecStart=/usr/local/bin/start-pwr-validator.sh
 Restart=on-failure
 StandardOutput=journal
