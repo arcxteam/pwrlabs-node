@@ -92,5 +92,4 @@ sudo systemctl start pwr.service
 
 # Menampilkan status layanan
 echo "PWR Validator service status:"
-sudo systemctl status pwr.service
 sudo journalctl -u pwr.service -f
