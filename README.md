@@ -28,6 +28,7 @@ sudo ufw allow 7621/udp && \
 sudo iptables -A INPUT -p tcp --dport 8085 -j ACCEPT && \
 sudo iptables -A INPUT -p tcp --dport 8231 -j ACCEPT && \
 sudo iptables -A INPUT -p udp --dport 7621 -j ACCEPT && \
+sudo netfilter-persistent save && \
 sudo ufw reload && \
 sudo pkill -f java && \
 sudo systemctl restart pwr.service && \
